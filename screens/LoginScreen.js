@@ -18,41 +18,20 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
-    >
+    <SafeAreaView style={styles.pageWrapper}>
       <Image
-        style={{ width: 150, height: 100 }}
+        style={styles.logo}
         source={{
           uri: "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",
         }}
       />
       <KeyboardAvoidingView>
         <View style={{ alignItems: "center" }}>
-          <Text
-            style={{
-              fontSize: 17,
-              fontWeight: "bold",
-              marginTop: 12,
-              color: "#041E42",
-            }}
-          >
-            Login to your account
-          </Text>
+          <Text style={styles.loginText}>Login to your account</Text>
         </View>
 
         <View style={{ marginTop: 70 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              backgroundColor: "#D0D0D0",
-              marginTop: 30,
-              gap: 5,
-              paddingVertical: 5,
-              borderRadius: 5,
-            }}
-          >
+          <View style={styles.inputWrapper}>
             <MaterialIcons
               name="email"
               size={24}
@@ -61,12 +40,7 @@ const LoginScreen = () => {
             />
             <TextInput
               placeholder="Enter your email"
-              style={{
-                color: "gray",
-                marginVertical: 10,
-                width: 300,
-                marginRight: 8,
-              }}
+              style={[styles.textInputStyle, { fontSize: email ? 16 : 16 }]}
               value={email}
               onChange={(text) => setEmail(text)}
             />
@@ -74,18 +48,7 @@ const LoginScreen = () => {
         </View>
 
         <View style={{ marginTop: 10 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              backgroundColor: "#D0D0D0",
-              marginTop: 30,
-              gap: 5,
-              paddingVertical: 5,
-              borderRadius: 5,
-              fontSize: email ? 16 : 16,
-            }}
-          >
+          <View style={styles.inputWrapper}>
             <MaterialIcons
               name="lock"
               size={24}
@@ -94,13 +57,7 @@ const LoginScreen = () => {
             />
             <TextInput
               placeholder="Enter your password"
-              style={{
-                color: "gray",
-                marginVertical: 10,
-                width: 300,
-                marginRight: 8,
-                fontSize: password ? 16 : 16,
-              }}
+              style={[styles.textInputStyle, { fontSize: password ? 16 : 16 }]}
               value={password}
               secureTextEntry={true}
               onChange={(text) => setPassword(text)}
@@ -108,42 +65,14 @@ const LoginScreen = () => {
           </View>
         </View>
 
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 15,
-          }}
-        >
+        <View style={styles.forgotPasswordContainer}>
           <Text>Keep me logged in</Text>
-          <Text style={{ fontWeight: 500, color: "#007FFF" }}>
-            Forgot Password
-          </Text>
+          <Text style={styles.forgotPasswordText}>Forgot Password</Text>
         </View>
 
         <View style={{ marginTop: 70 }}>
-          <Pressable
-            style={{
-              width: 200,
-              backgroundColor: "#FEBE10",
-              borderRadius: 5,
-              marginLeft: "auto",
-              marginRight: "auto",
-              padding: 15,
-            }}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                fontWeight: "bold",
-                color: "white",
-                fontSize: 16,
-              }}
-            >
-              {" "}
-              Login{" "}
-            </Text>
+          <Pressable style={styles.loginButton}>
+            <Text style={styles.loginButtonText}>Login</Text>
           </Pressable>
         </View>
 
@@ -151,9 +80,9 @@ const LoginScreen = () => {
           onPress={() => navigation.navigate("Register")}
           style={{ marginTop: 15 }}
         >
-          <Text style={{ color: "gray", textAlign: "center", flexShrink: 16 }}>
+          <Text style={styles.haveNoAccount}>
             Don't have an account?{" "}
-            <Text style={{ fontWeight: 500, color: "#007FFF" }}> Sign Up </Text>
+            <Text style={styles.forgotPasswordText}> Sign Up </Text>
           </Text>
         </Pressable>
       </KeyboardAvoidingView>
@@ -163,4 +92,65 @@ const LoginScreen = () => {
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  pageWrapper: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  logo: {
+    width: 150,
+    height: 100,
+  },
+  loginText: {
+    fontSize: 17,
+    fontWeight: "bold",
+    marginTop: 12,
+    color: "#041E42",
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#D0D0D0",
+    marginTop: 30,
+    gap: 5,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  textInputStyle: {
+    color: "gray",
+    marginVertical: 10,
+    width: 300,
+    marginRight: 8,
+    fontSize: 16,
+  },
+  forgotPasswordContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  forgotPasswordText: {
+    fontWeight: 500,
+    color: "#007FFF",
+  },
+  loginButton: {
+    width: 200,
+    backgroundColor: "#FEBE10",
+    borderRadius: 5,
+    marginLeft: "auto",
+    marginRight: "auto",
+    padding: 15,
+  },
+  loginButtonText: {
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 16,
+  },
+  haveNoAccount: {
+    color: "gray",
+    textAlign: "center",
+    flexShrink: 16,
+  },
+});
